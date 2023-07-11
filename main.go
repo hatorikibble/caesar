@@ -12,8 +12,9 @@ import (
 // RotationalCipher shifts parameter 'plain' by 'shiftKey' characters
 func RotationalCipher(plain string, shiftKey int) string {
 
-	var abc = "abcdefghijklmnopqrstuvwxyz"
-	var ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	const abc string = "abcdefghijklmnopqrstuvwxyz"
+	var ABC string = strings.ToUpper(abc)
+
 	var cipher string
 	var pos int
 
@@ -56,20 +57,16 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error during conversion of %s!", os.Args[1])
 			return
-
 		}
-
 	} else {
 		rotation = 0
 	}
 
 	stdin, err := ioutil.ReadAll(os.Stdin)
-
-        if err != nil {
-		log.Fatalf("Error reading from STDIN: %s!", err)		
+	if err != nil {
+		log.Fatalf("Error reading from STDIN: %s!", err)
 	}
 	str := string(stdin)
-
 
 	fmt.Print(RotationalCipher(str, rotation))
 }
